@@ -1,0 +1,675 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Tananik | Tejido con cariño</title>
+
+    <meta
+        name="description"
+        content="Tananik - Muñecos y regalos tejidos a crochet hechos con cariño."
+    >
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+
+    <link
+        href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Playfair+Display:wght@600;700&display=swap"
+        rel="stylesheet"
+    >
+
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+
+<!-- =========================
+     ENCABEZADO
+========================= -->
+
+<header class="header">
+
+    <div class="container nav">
+
+        <a href="#" class="logo">
+            <span class="logo-symbol">T</span>
+
+            <div>
+                <strong>Tananik</strong>
+                <small>Hecho con cariño</small>
+            </div>
+        </a>
+
+        <nav class="menu">
+            <a href="#inicio">Inicio</a>
+            <a href="#muñecos">Muñecos</a>
+            <a href="#peluches">Peluches</a>
+            <a href="#regalos">Regalos</a>
+            <a href="#contacto">Contacto</a>
+        </nav>
+
+        <button class="cart-button" onclick="abrirCarrito()">
+            🛒
+            <span>Carrito</span>
+            <b id="contadorCarrito">0</b>
+        </button>
+
+    </div>
+
+</header>
+
+
+<!-- =========================
+     HERO
+========================= -->
+
+<main>
+
+<section class="hero" id="inicio">
+
+    <div class="container hero-content">
+
+        <div class="hero-text">
+
+            <span class="eyebrow">HECHO A MANO EN GUATEMALA</span>
+
+            <h1>
+                Pequeños detalles,
+                <span>hechos con cariño.</span>
+            </h1>
+
+            <p>
+                Muñecos, peluches y regalos tejidos a crochet,
+                creados cuidadosamente para regalar, decorar
+                o simplemente sacar una sonrisa.
+            </p>
+
+            <div class="hero-buttons">
+
+                <a href="#muñecos" class="btn primary">
+                    Ver productos
+                </a>
+
+                <a href="#contacto" class="btn secondary">
+                    ¿Tienes una pregunta?
+                </a>
+
+            </div>
+
+        </div>
+
+        <div class="hero-art">
+
+            <div class="yarn-decoration yarn-one"></div>
+            <div class="yarn-decoration yarn-two"></div>
+
+            <div class="hero-card">
+
+                <div class="hero-card-icon">
+                    🧶
+                </div>
+
+                <span>Artesanal</span>
+
+                <strong>
+                    Cada pieza es especial
+                </strong>
+
+                <small>
+                    Elaborada puntada a puntada.
+                </small>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</section>
+
+
+<!-- =========================
+     CATEGORÍAS
+========================= -->
+
+<section class="categories">
+
+    <div class="container">
+
+        <div class="section-heading center">
+
+            <span class="eyebrow">DESCUBRE TANANIK</span>
+
+            <h2>
+                Algo bonito para cada ocasión
+            </h2>
+
+            <p>
+                Explora nuestras categorías y encuentra
+                ese pequeño detalle que estabas buscando.
+            </p>
+
+        </div>
+
+
+        <div class="category-grid">
+
+            <a href="#muñecos" class="category-card">
+
+                <div class="category-icon">
+                    🧸
+                </div>
+
+                <h3>Muñecos</h3>
+
+                <p>
+                    Personajes y figuras tejidos a crochet.
+                </p>
+
+                <span>
+                    Ver colección →
+                </span>
+
+            </a>
+
+
+            <a href="#peluches" class="category-card">
+
+                <div class="category-icon">
+                    🐻
+                </div>
+
+                <h3>Peluches</h3>
+
+                <p>
+                    Compañeros suaves y hechos a mano.
+                </p>
+
+                <span>
+                    Ver colección →
+                </span>
+
+            </a>
+
+
+            <a href="#regalos" class="category-card">
+
+                <div class="category-icon">
+                    🎁
+                </div>
+
+                <h3>Regalos</h3>
+
+                <p>
+                    Detalles especiales para personas especiales.
+                </p>
+
+                <span>
+                    Ver colección →
+                </span>
+
+            </a>
+
+        </div>
+
+    </div>
+
+</section>
+
+
+<!-- =========================
+     PRODUCTOS
+========================= -->
+
+<section class="products-section" id="muñecos">
+
+    <div class="container">
+
+        <div class="section-heading">
+
+            <div>
+                <span class="eyebrow">NUESTRA TIENDA</span>
+
+                <h2>
+                    Muñecos
+                </h2>
+            </div>
+
+            <p>
+                Piezas hechas cuidadosamente a mano.
+            </p>
+
+        </div>
+
+
+        <div class="products-grid" id="productos">
+
+            <!--
+                LOS PRODUCTOS SE GENERAN DESDE script.js
+            -->
+
+        </div>
+
+    </div>
+
+</section>
+
+
+<!-- =========================
+     PELUCHES
+========================= -->
+
+<section class="empty-category" id="peluches">
+
+    <div class="container">
+
+        <div class="empty-content">
+
+            <span class="empty-icon">🧸</span>
+
+            <span class="eyebrow">
+                PRÓXIMAMENTE
+            </span>
+
+            <h2>
+                Peluches
+            </h2>
+
+            <p>
+                Estamos preparando nuevos diseños tejidos
+                especialmente para esta colección.
+            </p>
+
+        </div>
+
+    </div>
+
+</section>
+
+
+<!-- =========================
+     REGALOS
+========================= -->
+
+<section class="gift-section" id="regalos">
+
+    <div class="container gift-content">
+
+        <div>
+
+            <span class="eyebrow">
+                UN DETALLE DIFERENTE
+            </span>
+
+            <h2>
+                Regala algo que tenga
+                una historia detrás.
+            </h2>
+
+            <p>
+                Los productos hechos a mano tienen algo especial:
+                no existen dos exactamente iguales.
+            </p>
+
+        </div>
+
+        <div class="gift-box">
+            🎁
+        </div>
+
+    </div>
+
+</section>
+
+
+<!-- =========================
+     SOBRE TANANIK
+========================= -->
+
+<section class="about-section">
+
+    <div class="container about-grid">
+
+        <div class="about-image">
+            <div class="about-placeholder">
+                🧶
+            </div>
+        </div>
+
+        <div class="about-text">
+
+            <span class="eyebrow">
+                SOBRE TANANIK
+            </span>
+
+            <h2>
+                Hecho a mano,
+                puntada a puntada.
+            </h2>
+
+            <p>
+                En Tananik creemos que los detalles hechos a mano
+                tienen un encanto diferente.
+            </p>
+
+            <p>
+                Cada muñeco es elaborado con paciencia y dedicación,
+                cuidando los pequeños detalles para que puedas llevar
+                contigo algo verdaderamente especial.
+            </p>
+
+            <div class="about-features">
+
+                <div>
+                    <strong>♡</strong>
+                    <span>Hecho a mano</span>
+                </div>
+
+                <div>
+                    <strong>✦</strong>
+                    <span>Diseños especiales</span>
+                </div>
+
+                <div>
+                    <strong>🧶</strong>
+                    <span>Trabajo artesanal</span>
+                </div>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</section>
+
+
+<!-- =========================
+     SERVICIO AL CLIENTE
+========================= -->
+
+<section class="contact-section" id="contacto">
+
+    <div class="container contact-grid">
+
+        <div class="contact-info">
+
+            <span class="eyebrow">
+                ¿NECESITAS AYUDA?
+            </span>
+
+            <h2>
+                Estamos para ayudarte.
+            </h2>
+
+            <p>
+                Si tienes alguna pregunta sobre un producto,
+                quieres consultar disponibilidad o simplemente
+                quieres saber más sobre algún muñeco,
+                escríbenos.
+            </p>
+
+            <a
+                class="whatsapp-direct"
+                href="https://wa.me/50249450428"
+                target="_blank"
+            >
+                <span>💬</span>
+
+                <div>
+                    <strong>WhatsApp</strong>
+                    <small>4945-0428</small>
+                </div>
+
+                <b>→</b>
+            </a>
+
+        </div>
+
+
+        <div class="question-box">
+
+            <h3>
+                Pregunta por un producto
+            </h3>
+
+            <p>
+                Escribe tu mensaje y te ayudaremos por WhatsApp.
+            </p>
+
+            <input
+                type="text"
+                id="nombreCliente"
+                placeholder="Tu nombre"
+            >
+
+            <textarea
+                id="mensajeCliente"
+                placeholder="¿En qué podemos ayudarte?"
+                rows="5"
+            ></textarea>
+
+            <button
+                class="btn primary full"
+                onclick="enviarConsulta()"
+            >
+                Enviar consulta por WhatsApp
+            </button>
+
+        </div>
+
+    </div>
+
+</section>
+
+
+<!-- =========================
+     INFORMACIÓN DE PAGO
+========================= -->
+
+<section class="payment-section">
+
+    <div class="container payment-box">
+
+        <div class="payment-icon">
+            💵
+        </div>
+
+        <div>
+
+            <span class="eyebrow">
+                FORMA DE PAGO
+            </span>
+
+            <h3>
+                Pago únicamente en efectivo
+            </h3>
+
+            <p>
+                Por el momento no aceptamos pagos con tarjeta.
+                El pago se realiza en dinero físico.
+            </p>
+
+        </div>
+
+    </div>
+
+</section>
+
+</main>
+
+
+<!-- =========================
+     FOOTER
+========================= -->
+
+<footer class="footer">
+
+    <div class="container footer-content">
+
+        <div class="footer-brand">
+
+            <div class="logo footer-logo">
+
+                <span class="logo-symbol">T</span>
+
+                <div>
+                    <strong>Tananik</strong>
+                    <small>Hecho con cariño</small>
+                </div>
+
+            </div>
+
+            <p>
+                Muñecos y detalles tejidos
+                con dedicación en Guatemala.
+            </p>
+
+        </div>
+
+
+        <div class="footer-links">
+
+            <h4>Tienda</h4>
+
+            <a href="#muñecos">Muñecos</a>
+            <a href="#peluches">Peluches</a>
+            <a href="#regalos">Regalos</a>
+
+        </div>
+
+
+        <div class="footer-links">
+
+            <h4>Ayuda</h4>
+
+            <a href="#contacto">Servicio al cliente</a>
+            <a href="https://wa.me/50249450428" target="_blank">
+                WhatsApp
+            </a>
+
+        </div>
+
+    </div>
+
+
+    <div class="footer-bottom">
+
+        <p>
+            © 2026 Tananik. Hecho a mano con cariño.
+        </p>
+
+    </div>
+
+</footer>
+
+
+<!-- =========================
+     CARRITO
+========================= -->
+
+<div
+    class="cart-overlay"
+    id="cartOverlay"
+    onclick="cerrarCarritoDesdeFondo(event)"
+>
+
+    <aside class="cart-panel">
+
+        <div class="cart-header">
+
+            <div>
+
+                <span class="eyebrow">
+                    TU PEDIDO
+                </span>
+
+                <h2>
+                    Carrito
+                </h2>
+
+            </div>
+
+            <button
+                class="close-cart"
+                onclick="cerrarCarrito()"
+            >
+                ×
+            </button>
+
+        </div>
+
+
+        <div
+            class="cart-items"
+            id="cartItems"
+        >
+
+        </div>
+
+
+        <div
+            class="cart-empty"
+            id="cartEmpty"
+        >
+
+            <div>
+                🛒
+            </div>
+
+            <h3>
+                Tu carrito está vacío
+            </h3>
+
+            <p>
+                Agrega algún producto para comenzar tu pedido.
+            </p>
+
+            <button
+                class="btn secondary"
+                onclick="cerrarCarrito()"
+            >
+                Ver productos
+            </button>
+
+        </div>
+
+
+        <div
+            class="cart-footer"
+            id="cartFooter"
+        >
+
+            <div class="cart-total">
+
+                <span>Total</span>
+
+                <strong id="cartTotal">
+                    Q0.00
+                </strong>
+
+            </div>
+
+            <p class="cash-note">
+                💵 El pago se realiza únicamente en efectivo.
+            </p>
+
+            <button
+                class="btn whatsapp-btn full"
+                onclick="enviarPedido()"
+            >
+                💬 Enviar pedido por WhatsApp
+            </button>
+
+        </div>
+
+    </aside>
+
+</div>
+
+
+<script src="script.js"></script>
+
+</body>
+</html>

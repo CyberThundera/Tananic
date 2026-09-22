@@ -1,86 +1,37 @@
-/* =====================================
+/* =========================================
    TANANIK
-   SISTEMA DE TIENDA
-===================================== */
+   TIENDA
+========================================= */
 
 
-/*
-    =====================================
-    PRODUCTOS
-    =====================================
-
-    PARA AGREGAR MÁS PRODUCTOS:
-
-    Copia uno de estos objetos y cambia
-    los datos.
-
-    category puede ser:
-
-    "Muñecos"
-    "Peluches"
-    "Regalos"
-
-    Si tienes una fotografía del producto,
-    coloca su ruta en "image".
-
-    Ejemplo:
-
-    image: "imagenes/pato-lucas.jpg"
-
-    Si no colocas imagen:
-
-    image: ""
-
-    se mostrará un emoji.
-*/
-
-
-const productos = [
-
-    {
-        id: 1,
-
-        nombre: "Pato Lucas con pantalones para tiendas",
-
-        categoria: "Muñecos",
-
-        precio: 20,
-
-        descripcion:
-            "Muñeco tejido a crochet inspirado en el Pato Lucas.",
-
-        emoji: "🦆",
-
-        image: ""
-    }
-
-];
-
-
-/*
-    =====================================
-    CARRITO
-=====================================
-*/
+/* =========================================
+   CARRITO
+========================================= */
 
 let carrito = [];
 
 
-/*
-    =====================================
-    MOSTRAR PRODUCTOS
-=====================================
-*/
+/* =========================================
+   PRODUCTOS
+   Los productos vienen de productos.js
+========================================= */
 
-function mostrarProductos() {
+
+/* =========================================
+   MOSTRAR TODOS LOS PRODUCTOS
+========================================= */
+
+function mostrarProductos(lista = productos) {
 
     const contenedor =
         document.getElementById("productos");
 
+    if (!contenedor) return;
+
     contenedor.innerHTML = "";
 
 
-    productos.forEach(producto => {
+    lista.forEach(producto => {
 
         const tarjeta =
             document.createElement("article");
@@ -88,26 +39,13 @@ function mostrarProductos() {
         tarjeta.className = "product-card";
 
 
-        let imagenHTML;
-
-
-        if (producto.image) {
-
-            imagenHTML = `
-                <img
-                    src="${producto.image}"
-                    alt="${producto.nombre}"
-                >
-            `;
-
-        } else {
-
-            imagenHTML = `
-                <div class="image-placeholder">
-                    ${producto.emoji}
-                </div>
-            `;
-        }
+        let imagenHTML = `
+            <img
+                src="${producto.image}"
+                alt="${producto.nombre}"
+                loading="lazy"
+            >
+        `;
 
 
         tarjeta.innerHTML = `
@@ -139,7 +77,13 @@ function mostrarProductos() {
                 <div class="product-bottom">
 
                     <span class="product-price">
-                        Q${producto.precio.toFixed(2)}
+
+                        ${
+                            producto.precio > 0
+                            ? `Q${producto.precio.toFixed(2)}`
+                            : "Consultar"
+                        }
+
                     </span>
 
 
@@ -164,25 +108,65 @@ function mostrarProductos() {
 }
 
 
-/*
-    =====================================
-    AGREGAR AL CARRITO
-=====================================
-*/
+/* =========================================
+   FILTRAR POR CATEGORIA
+========================================= */
+
+function mostrarCategoria(categoria) {
+
+    const filtrados =
+        productos.filter(
+            producto =>
+                producto.categoria === categoria
+        );
+
+    mostrarProductos(filtrados);
+
+}
+
+
+/* =========================================
+   AGREGAR AL CARRITO
+========================================= */
 
 function agregarAlCarrito(id) {
 
     const producto =
-        productos.find(p => p.id === id);
+        productos.find(
+            producto => producto.id === id
+        );
 
 
-    if (!producto) {
+    if (!producto) return;
+
+
+    /*
+        Si todavía no tiene precio,
+        no permitimos comprarlo.
+    */
+
+    if (producto.precio <= 0) {
+
+        const mensaje =
+            `Hola, Tananik. 🧶\n\n` +
+            `Quisiera consultar el precio de:\n` +
+            `${producto.nombre}`;
+
+        const url =
+            `https://wa.me/50249450428?text=${
+                encodeURIComponent(mensaje)
+            }`;
+
+        window.open(url, "_blank");
+
         return;
     }
 
 
     const existente =
-        carrito.find(item => item.id === id);
+        carrito.find(
+            item => item.id === id
+        );
 
 
     if (existente) {
@@ -201,9 +185,7 @@ function agregarAlCarrito(id) {
 
             cantidad: 1,
 
-            image: producto.image,
-
-            emoji: producto.emoji
+            image: producto.image
 
         });
 
@@ -217,11 +199,9 @@ function agregarAlCarrito(id) {
 }
 
 
-/*
-    =====================================
-    ACTUALIZAR CARRITO
-=====================================
-*/
+/* =========================================
+   ACTUALIZAR CARRITO
+========================================= */
 
 function actualizarCarrito() {
 
@@ -234,12 +214,14 @@ function actualizarCarrito() {
     const totalElemento =
         document.getElementById("cartTotal");
 
-
     const vacio =
         document.getElementById("cartEmpty");
 
     const footer =
         document.getElementById("cartFooter");
+
+
+    if (!contenedor) return;
 
 
     contenedor.innerHTML = "";
@@ -252,41 +234,28 @@ function actualizarCarrito() {
 
     carrito.forEach(item => {
 
-        total += item.precio * item.cantidad;
+        total +=
+            item.precio * item.cantidad;
 
-        cantidadTotal += item.cantidad;
-
-
-        let imagen;
-
-
-        if (item.image) {
-
-            imagen = `
-                <img
-                    src="${item.image}"
-                    alt="${item.nombre}"
-                >
-            `;
-
-        } else {
-
-            imagen = item.emoji;
-
-        }
+        cantidadTotal +=
+            item.cantidad;
 
 
         const elemento =
             document.createElement("div");
 
-        elemento.className = "cart-item";
+        elemento.className =
+            "cart-item";
 
 
         elemento.innerHTML = `
 
             <div class="cart-item-image">
 
-                ${imagen}
+                <img
+                    src="${item.image}"
+                    alt="${item.nombre}"
+                >
 
             </div>
 
@@ -297,6 +266,7 @@ function actualizarCarrito() {
                     ${item.nombre}
                 </h4>
 
+
                 <span class="cart-item-price">
                     Q${item.precio.toFixed(2)}
                 </span>
@@ -305,7 +275,10 @@ function actualizarCarrito() {
                 <div class="quantity-controls">
 
                     <button
-                        onclick="cambiarCantidad(${item.id}, -1)"
+                        onclick="cambiarCantidad(
+                            ${item.id},
+                            -1
+                        )"
                     >
                         −
                     </button>
@@ -317,7 +290,10 @@ function actualizarCarrito() {
 
 
                     <button
-                        onclick="cambiarCantidad(${item.id}, 1)"
+                        onclick="cambiarCantidad(
+                            ${item.id},
+                            1
+                        )"
                     >
                         +
                     </button>
@@ -367,21 +343,19 @@ function actualizarCarrito() {
 }
 
 
-/*
-    =====================================
-    CAMBIAR CANTIDAD
-=====================================
-*/
+/* =========================================
+   CANTIDAD
+========================================= */
 
 function cambiarCantidad(id, cambio) {
 
     const producto =
-        carrito.find(item => item.id === id);
+        carrito.find(
+            item => item.id === id
+        );
 
 
-    if (!producto) {
-        return;
-    }
+    if (!producto) return;
 
 
     producto.cantidad += cambio;
@@ -390,7 +364,9 @@ function cambiarCantidad(id, cambio) {
     if (producto.cantidad <= 0) {
 
         carrito =
-            carrito.filter(item => item.id !== id);
+            carrito.filter(
+                item => item.id !== id
+            );
 
     }
 
@@ -400,61 +376,62 @@ function cambiarCantidad(id, cambio) {
 }
 
 
-/*
-    =====================================
-    ELIMINAR PRODUCTO
-=====================================
-*/
+/* =========================================
+   ELIMINAR
+========================================= */
 
 function eliminarDelCarrito(id) {
 
     carrito =
-        carrito.filter(item => item.id !== id);
+        carrito.filter(
+            item => item.id !== id
+        );
+
 
     actualizarCarrito();
 
 }
 
 
-/*
-    =====================================
-    ABRIR CARRITO
-=====================================
-*/
+/* =========================================
+   ABRIR CARRITO
+========================================= */
 
 function abrirCarrito() {
 
-    document
-        .getElementById("cartOverlay")
-        .classList.add("active");
+    const carritoOverlay =
+        document.getElementById("cartOverlay");
 
-    document.body.style.overflow = "hidden";
+
+    carritoOverlay.classList.add("active");
+
+    document.body.style.overflow =
+        "hidden";
 
 }
 
 
-/*
-    =====================================
-    CERRAR CARRITO
-=====================================
-*/
+/* =========================================
+   CERRAR CARRITO
+========================================= */
 
 function cerrarCarrito() {
 
-    document
-        .getElementById("cartOverlay")
-        .classList.remove("active");
+    const carritoOverlay =
+        document.getElementById("cartOverlay");
 
-    document.body.style.overflow = "";
+
+    carritoOverlay.classList.remove("active");
+
+    document.body.style.overflow =
+        "";
 
 }
 
 
-/*
-    =====================================
-    CERRAR AL HACER CLICK AFUERA
-=====================================
-*/
+/* =========================================
+   CERRAR HACIENDO CLICK AFUERA
+========================================= */
 
 function cerrarCarritoDesdeFondo(event) {
 
@@ -469,11 +446,9 @@ function cerrarCarritoDesdeFondo(event) {
 }
 
 
-/*
-    =====================================
-    ENVIAR PEDIDO POR WHATSAPP
-=====================================
-*/
+/* =========================================
+   ENVIAR PEDIDO A WHATSAPP
+========================================= */
 
 function enviarPedido() {
 
@@ -484,6 +459,7 @@ function enviarPedido() {
         );
 
         return;
+
     }
 
 
@@ -494,8 +470,9 @@ function enviarPedido() {
     let mensaje =
         "Hola, Tananik. 🧶💕\n\n";
 
+
     mensaje +=
-        "Me gustaría realizar una consulta sobre este pedido:\n\n";
+        "Quisiera realizar este pedido:\n\n";
 
 
     let total = 0;
@@ -504,7 +481,8 @@ function enviarPedido() {
     carrito.forEach(item => {
 
         const subtotal =
-            item.precio * item.cantidad;
+            item.precio *
+            item.cantidad;
 
 
         total += subtotal;
@@ -517,24 +495,30 @@ function enviarPedido() {
             `  Cantidad: ${item.cantidad}\n`;
 
         mensaje +=
-            `  Precio: Q${item.precio.toFixed(2)}\n\n`;
+            `  Precio: Q${item.precio.toFixed(2)}\n`;
+
+        mensaje +=
+            `  Subtotal: Q${subtotal.toFixed(2)}\n\n`;
 
     });
 
 
     mensaje +=
-        `Total: Q${total.toFixed(2)}\n\n`;
+        `TOTAL: Q${total.toFixed(2)}\n\n`;
 
 
     mensaje +=
-        "Sé que el pago se realiza en efectivo. 💵\n";
+        "El pago será realizado en efectivo. 💵\n\n";
+
 
     mensaje +=
-        "Quisiera consultar disponibilidad y los detalles para realizar la compra. 😊";
+        "Quisiera confirmar disponibilidad y los detalles de entrega."
 
 
     const url =
-        `https://wa.me/${numero}?text=${encodeURIComponent(mensaje)}`;
+        `https://wa.me/${numero}?text=${
+            encodeURIComponent(mensaje)
+        }`;
 
 
     window.open(
@@ -545,11 +529,9 @@ function enviarPedido() {
 }
 
 
-/*
-    =====================================
-    CONSULTA DE SERVICIO AL CLIENTE
-=====================================
-*/
+/* =========================================
+   CONSULTA AL CLIENTE
+========================================= */
 
 function enviarConsulta() {
 
@@ -574,28 +556,21 @@ function enviarConsulta() {
         );
 
         return;
+
     }
 
 
-    const numero =
-        "50249450428";
-
-
-    let texto =
-        `Hola, Tananik. 🧶💕\n\n`;
-
-    texto +=
-        `Mi nombre es ${nombre}.\n\n`;
-
-    texto +=
-        `${mensaje}\n\n`;
-
-    texto +=
-        "Gracias. 😊";
+    const texto =
+        `Hola, Tananik. 🧶💕\n\n` +
+        `Mi nombre es ${nombre}.\n\n` +
+        `${mensaje}\n\n` +
+        `Gracias. 😊`;
 
 
     const url =
-        `https://wa.me/${numero}?text=${encodeURIComponent(texto)}`;
+        `https://wa.me/50249450428?text=${
+            encodeURIComponent(texto)
+        }`;
 
 
     window.open(
@@ -606,11 +581,58 @@ function enviarConsulta() {
 }
 
 
-/*
-    =====================================
-    INICIAR PÁGINA
-=====================================
-*/
+/* =========================================
+   BUSCADOR
+========================================= */
+
+function buscarProductos() {
+
+    const input =
+        document.getElementById("buscador");
+
+
+    if (!input) return;
+
+
+    const texto =
+        input.value
+            .toLowerCase()
+            .trim();
+
+
+    if (!texto) {
+
+        mostrarProductos();
+
+        return;
+
+    }
+
+
+    const resultados =
+        productos.filter(producto =>
+
+            producto.nombre
+                .toLowerCase()
+                .includes(texto)
+
+            ||
+
+            producto.categoria
+                .toLowerCase()
+                .includes(texto)
+
+        );
+
+
+    mostrarProductos(resultados);
+
+}
+
+
+/* =========================================
+   INICIAR
+========================================= */
 
 mostrarProductos();
 
